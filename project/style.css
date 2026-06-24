@@ -1,0 +1,281 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    
+}
+body{
+    background-color: rgb(255, 255, 255);
+}
+
+
+/* containe===========r */
+
+
+
+.container{
+    /* background-color: rgba(155, 140, 140, 0.678); */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1280px;
+    margin: auto;
+    
+}
+.logo a{
+    /* background-color: rgb(152, 118, 184); */
+    text-decoration: none;
+    font-smooth: 18px;
+    color: orangered;
+
+}
+.logo a:hover{
+    color: green;
+}
+.nav-bar{
+    /* background-color: rgb(240, 224, 2); */
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+nav{
+    /* background-color: chartreuse; */
+    display: flex;
+    gap: 20px;
+}
+nav a{
+    text-decoration: none;
+    color: rgb(53, 52, 52);
+}
+nav a:hover{
+    color: rgb(255, 6, 6);
+}
+
+.menu i{
+    font-size: 20px;
+    font-size: 900;
+}
+@media (max-width: 768px){
+    .container{
+        /* background-color: green; */
+    }
+    nav{
+        display: none;
+    }
+    .menu{
+        display: block;
+    }
+    
+    
+}
+
+
+
+
+/* container 2=========================================== */
+
+.container2{
+        background-color: aliceblue;
+        width: 90%;
+        margin: auto;
+        display: none;
+    }
+    /* #mobile{
+        height: 0px;
+        display: none;
+        overflow: hidden;
+        transition: all 2s linear;
+
+    } */
+
+    .nav-2{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        background-color: black;
+        padding: 20px;
+    }
+    .nav-2 a{
+        color: white;
+        text-decoration: none;
+    
+    }
+
+
+main{
+    /* background-color: lightgreen; */
+    max-width: 1280px;
+    margin: auto;
+    display: flex;
+    /* flex-direction: row; */
+}
+.description{
+    /* background-color: lightpink; */
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+.description div h1{
+    font-size: 48px;
+    
+}
+.description div p{
+    color: gray;
+    margin: 16px 0px;
+}
+.description div a{
+    color: green;
+}
+
+.photo{
+    /* background-color: lightseagreen; */
+    width: 50%;
+}
+.btn{
+    background-color: orangered;
+    margin: 30px 0px;
+    padding: 8px 30px;
+    font: 16px 
+    Poppins, sans-serif;
+    display: inline-block;
+    color: rgb(255, 255, 255);
+    border-radius: 30px;
+}
+img{
+    width: 100%;
+    height: 100%;
+}
+@media(max-width: 768px){
+    main{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .description{
+        width: 100%;
+        text-align: center;
+        margin: 80px 0px;
+    }
+    .photo{
+        width: 100%;
+        padding: 40px;
+    }
+}
+
+
+
+/* category===================== */
+
+
+
+
+.category{
+    /* background-color: blue; */
+    display: flex;
+    max-width: 1000px;
+    margin: auto;
+    justify-content: space-evenly;
+    gap: 40px 0px;
+    flex-wrap: wrap;
+}
+.item3{
+    max-width: 25%;
+    min-width: 200px;
+}
+
+
+
+/* =========.product =========*/
+
+
+.product{
+    /* background-color: rgb(139, 139, 239); */
+    max-width: 1280px;
+    margin: auto;
+    margin-top: 80px;
+}
+.title h2{
+    text-align: center;
+    margin: 80px;
+}
+.con-pro{
+    /* background-color: rgb(179, 114, 240); */
+    display: flex;
+    max-width: 1000px;
+    margin: auto;
+    justify-content: space-evenly;
+    gap: 40px 0px;
+    flex-wrap: wrap;
+
+}
+.pro{
+    /* background-color: rgb(241, 156, 156); */
+    box-shadow: 0px 0px 4px gray;
+    width: 20%;
+    min-width: 200px;
+    transition: all 0.2s ease;
+    /* height: 350px; */
+
+}
+.pro:hover{
+    box-shadow: 0px 0px 8px orangered;
+    cursor: pointer;
+    translate: 0px -5px;
+    scale: 1.1;
+}
+.pro-des{
+    padding: 8%;
+}
+@media(max-width: 768px){
+    main{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .product{
+        width: 100%;
+        text-align: center;
+        margin: 80px 0px;
+    }
+    .pro{
+        width: 70%;
+        padding: 20px;
+        margin: 30px;
+    }
+}
+.rate{
+    color: rgb(255, 115, 0);
+}
+.price{
+    color: rgb(255, 123, 0);
+}
+.name{
+    color: gray;
+}
+
+/* footer */
+
+.footer{
+    /* background-color: blue; */
+    text-align: center;
+    margin: 80px;
+    padding: 14px;
+}
+.footer p{
+    color: rgb(255, 255, 255);
+}
+
+
+.current-page{
+    text-decoration: underline;
+    color: orangered;
+    font-weight: 500;
+}
+
+.container2.active{
+    display: block;
+}
+
+
