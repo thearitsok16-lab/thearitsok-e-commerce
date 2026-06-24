@@ -1,115 +1,567 @@
-<!doctype html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thearit</title>
-    <link rel="stylesheet" href="style.css" />
-    <!-- google-font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet" />
-    <!-- font awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus Dynamics - Intelligent Enterprise Solutions</title>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #34495e;
+      --accent: #3498db;
+      --accent-hover: #2980b9;
+      --light: #ecf0f1;
+      --neutral: #95a5a6;
+      --white: #ffffff;
+      --transition: 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--light);
+      color: var(--primary);
+      overflow-x: hidden;
+      max-width: 1280px;
+      margin: auto;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: var(--white);
+      padding: 0;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: box-shadow var(--transition), transform var(--transition);
+      
+    }
+
+    .header-container {
+      max-width: 1280px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
+
+    .scrolled {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .header-hidden {
+      transform: translateY(-100%);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--primary);
+      position: relative;
+    }
+
+    .logo-symbol {
+      height: 32px;
+      width: 32px;
+      background-color: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-symbol:before {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background-color: var(--white);
+      border-radius: 50%;
+      transform: translate(-4px, -4px);
+      transition: transform var(--transition);
+    }
+
+    .logo:hover .logo-symbol:before {
+      transform: translate(-2px, -2px);
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text span {
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .desktop-nav {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav {
+        display: none;
+      }
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--secondary);
+      font-weight: 500;
+      font-size: 0.95rem;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: color var(--transition);
+    }
+
+    .nav-link:hover {
+      color: var(--accent);
+    }
+
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent);
+      transition: width var(--transition);
+    }
+
+    .nav-link:hover:after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--accent);
+    }
+
+    .nav-link.active:after {
+      width: 100%;
+    }
+
+    .nav-action {
+      background-color: var(--accent);
+      color: var(--white);
+      border: none;
+      border-radius: 4px;
+      padding: 0.6rem 1.2rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color var(--transition), transform var(--transition);
+      margin-left: 1.5rem;
+    }
+
+    .nav-action:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-action {
+        margin-left: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    .hamburger {
+      width: 24px;
+      height: 20px;
+      position: relative;
+      transform: rotate(0deg);
+      transition: .5s ease-in-out;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background: var(--primary);
+      border-radius: 2px;
+      opacity: 1;
+      left: 0;
+      transform: rotate(0deg);
+      transition: .25s ease-in-out;
+    }
+
+    .hamburger span:nth-child(1) {
+      top: 0px;
+    }
+
+    .hamburger span:nth-child(2), .hamburger span:nth-child(3) {
+      top: 8px;
+    }
+
+    .hamburger span:nth-child(4) {
+      top: 16px;
+    }
+
+    .mobile-menu-open .hamburger span:nth-child(1) {
+      top: 8px;
+      width: 0%;
+      left: 50%;
+    }
+
+    .mobile-menu-open .hamburger span:nth-child(2) {
+      transform: rotate(45deg);
+    }
+
+    .mobile-menu-open .hamburger span:nth-child(3) {
+      transform: rotate(-45deg);
+    }
+
+    .mobile-menu-open .hamburger span:nth-child(4) {
+      top: 8px;
+      width: 0%;
+      left: 50%;
+    }
+
+    .mobile-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: var(--white);
+      padding: 1rem;
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-10px);
+      opacity: 0;
+      transition: transform var(--transition), opacity var(--transition);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .mobile-menu.show {
+      display: flex;
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .mobile-nav-link {
+      text-decoration: none;
+      color: var(--secondary);
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: color var(--transition);
+    }
+
+    .mobile-nav-link:hover {
+      color: var(--accent);
+    }
+
+    .mobile-nav-link.active {
+      color: var(--accent);
+    }
+
+    /* Content for demo purposes */
+    main {
+      margin-top: 80px;
+      padding: 2rem 1.5rem;
+      flex: 1;
+    }
+
+    .content-section {
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--primary);
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    p {
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      color: var(--secondary);
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .cta-primary {
+      background-color: var(--accent);
+      color: var(--white);
+      border: none;
+      border-radius: 4px;
+      padding: 0.8rem 1.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color var(--transition), transform var(--transition);
+    }
+
+    .cta-primary:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .cta-secondary {
+      background-color: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      padding: 0.8rem 1.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color var(--transition), color var(--transition), transform var(--transition);
+    }
+
+    .cta-secondary:hover {
+      background-color: var(--accent);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 600px) {
+      .cta-group {
+        flex-direction: column;
+      }
+    }
+
+    /* Header notification */
+    .header-notification {
+      background-color: var(--accent);
+      color: var(--white);
+      text-align: center;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-notification:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      100% {
+        left: 150%;
+      }
+    }
+
+    .notification-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .notification-content svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .notification-cta {
+      font-weight: 700;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-left: 4px;
+    }
+    .product{
+    /* background-color: rgb(139, 139, 239); */
+    max-width: 1280px;
+    margin: auto;
+    margin-top: 80px;
+    
+}
+.title h2{
+    text-align: center;
+    margin: 50px;
+}
+
+
+.pro{ 
+    /* background-color: rgb(241, 156, 156); */
+    box-shadow: 0px 0px 4px gray;
+    /* width: 20%; */
+    min-width: 200px;
+    transition: all 0.2s ease;
+    /* height: 50px; */
+    /* max-width: 200px; */
+    display: block;
+    margin:50px ;
+    /* align-items: center; */
+    /* text-align: center; */
+    /* gap: 50px; */
+
+}
+.pro:hover{
+    box-shadow: 0px 0px 8px rgb(18, 194, 170);
+    cursor: pointer;
+    translate: 0px -5px;
+    scale: 1.1;
+}
+.pro-des{
+    padding: 8%;
+}
+.rate{
+    color: orangered;
+}
+.name {
+    color: gray;
+}
+.price{
+    color: lightcoral;
+}
+@media(max-width: 768px){
+    main{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .product{
+        width: 100%;
+        text-align: center;
+        margin: 80px 0px;
+    }
+    .pro{
+        width: 70%;
+        padding: 20px;
+        margin: 30px;
+    }
+}.footer{
+    background-color: burlywood;
+    text-align: center;
+    color: white;
+    padding: 30px;
+    margin: 50px;
+    
+}
+.content-section{
+    text-align: center;
+}
+  </style>
 </head>
-
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="">MasterIT Store</a>
-            </div>
-
-            <div class="nav-bar">
-                <nav>
-                    <a href="/" class="current-page">Home</a>
-                    <a href="./page/product.html">Product</a>
-                    <a href="./page/about.html">About</a>
-                    <a href="./page/contact.html">Contact</a>
-                    
-                </nav>
-                <div class="shopping">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                </div>
-                <div class="menu">
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="container2">
-            <div class="nav-2">
-                <a href="">Home</a>
-                <a href="">Product</a>
-                <a href="">About</a>
-                <a href="">Contact</a>
-            </div>
-            
-
-        </div>
-
-        
-
-        
-    </header>
-
-    <!-- main -->
-
-
-    <main>
-        <div class="description">
-            <div>
-                <h1>Give Your Workout <br> A New Style!</h1>
-            <p>Success isn't always about greatness. It's about <br>
-                consistency. Consistent <br>
-                hard work gains success. Greatness will come.</p>
-            <a href="#" target="_blank" rel="noopener noreferrer" class="btn">Explore Now →</a>
-            </div>
-        </div>
-
-        <div class="photo">
-            <div class="col-2">
-                <img src="./images/img-01.png" alt="">
-            </div>
-        </div>
-
-    </main>
-
-    <!-- ctegory -->
-    
-
-    <div class="category">
-        <div class="item item3">
-            <img src="./images/category-1.jpg" alt="">
-        </div>
-        <div class="item item3">
-            <img src="./images/category-2.jpg" alt="">
-        </div>
-        <div class="item item3">
-            <img src="./images/category-3.jpg" alt="">
-        </div>
+  <header id="site-header">
+    <div class="header-notification">
+      <div class="notification-content">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clip-rule="evenodd" />
+        </svg>
+        <span>please support my project <span class="notification-cta">inter here</span></span>
+      </div>
     </div>
+    <div class="header-container">
+      <a href="#" class="logo">
+        <div class="logo-symbol"></div>
+        <div class="logo-text">Thearit<span>store</span></div>
+      </a>
+      <nav>
+        <ul class="desktop-nav">
+          <li><a href="#" class="nav-link active">Home</a></li>
+          <li><a href="./product.html" class="nav-link">product</a></li>
+          <li><a href="./about.html" class="nav-link">about</a></li>
+          <li><a href="./contact.html" class="nav-link">Contact</a></li>
+          
+        </ul>
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+          <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+        <button class="nav-action">Let see</button>
+      </nav>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#" class="mobile-nav-link active">Home</a>
+      <a href="/product.html" class="mobile-nav-link">Product</a>
+      <a href="/about.html" class="mobile-nav-link">About</a>
+      <a href="/contact.html" class="mobile-nav-link">contact</a>
+    </div>
+  </header>
 
-    <!-- product -->
-    
+  <main>
+    <section class="content-section">
+      <h1>FOllOW  <span>ME BY </span><br>YOUR PHONE</h1>
 
-    <div class="product">
+      <p>Nexus Dynamics provides data-driven solutions that transform business operations with actionable insights. Our integrated platform merges AI analytics with enterprise workflows to optimize decision-making at every level.</p>
+      <div class="cta-group">
+        <button class="cta-primary">contact me</button>
+        <button class="cta-secondary">View product</button>
+      </div>
+    </section>
+  </main>
+        <div class="product">
         <div class="title">
-            <h2>Featured Products</h2>
+            <h2>check our page</h2>
         </div>
         <div class="con-pro">
             
             <div class="pro">
                 <div class="pro-img">
-                    <img src="./images/product-1.jpg" alt="">
+                    <img src="../imgs/BMW (1).jpg" alt="">
                 </div>
                 <div class="pro-des">
-                    <p class="name">Red Printed T-shirt</p>
+                    <p class="name">BMW S1000RR</p>
                     <div class="rate">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -117,15 +569,15 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i>
                     </div>
-                    <p class="price">$500.00</p>
+                    <p class="price">$10000.00</p>
                 </div>
             </div>
             <div class="pro">
                 <div class="pro-img">
-                    <img src="./images/product-10.jpg" alt="">
+                    <img src="../imgs/BMW (2).jpg" alt="">
                 </div>
                 <div class="pro-des">
-                    <p class="name">Red Printed T-shirt</p>
+                    <p class="name">BMW S1000RR</p>
                     <div class="rate">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -133,15 +585,15 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i>
                     </div>
-                    <p class="price">$500.00</p>
+                    <p class="price">$10000.00</p>
                 </div>
             </div>
             <div class="pro">
                 <div class="pro-img">
-                    <img src="./images/product-11.jpg" alt="">
+                    <img src="../imgs/BMW (3).jpg" alt="">
                 </div>
                 <div class="pro-des">
-                    <p class="name">Red Printed T-shirt</p>
+                    <p class="name">BMW S1000RR</p>
                     <div class="rate">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -149,15 +601,15 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i>
                     </div>
-                    <p class="price">$500.00</p>
+                    <p class="price">$10000.00</p>
                 </div>
             </div>
             <div class="pro">
                 <div class="pro-img">
-                    <img src="./images/product-12.jpg" alt="">
+                    <img src="../imgs/ducati (1).jpg" alt="">
                 </div>
                 <div class="pro-des">
-                    <p class="name">Red Printed T-shirt</p>
+                    <p class="name">DUCATI PANIGALE V4</p>
                     <div class="rate">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -165,7 +617,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i>
                     </div>
-                    <p class="price">$500.00</p>
+                    <p class="price">$20000.00</p>
                 </div>
             </div>
             
@@ -183,10 +635,10 @@
             
             <div class="pro">
                 <div class="pro-img">
-                    <img src="./images/product-1.jpg" alt="">
+                    <img src="../imgs/ducati (2).jpg" alt="">
                 </div>
                 <div class="pro-des">
-                    <p class="name">Red Printed T-shirt</p>
+                    <p class="name">DUCATI PANIGALE V4</p>
                     <div class="rate">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -194,15 +646,15 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i>
                     </div>
-                    <p class="price">$500.00</p>
+                    <p class="price">$20000.00</p>
                 </div>
             </div>
             <div class="pro">
                 <div class="pro-img">
-                    <img src="./images/product-10.jpg" alt="">
+                    <img src="../imgs/ducati (3).jpg" alt="">
                 </div>
                 <div class="pro-des">
-                    <p class="name">Red Printed T-shirt</p>
+                    <p class="name">DUCATI PANIGALE V4</p>
                     <div class="rate">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -210,15 +662,15 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i>
                     </div>
-                    <p class="price">$500.00</p>
+                    <p class="price">$20000.00</p>
                 </div>
             </div>
             <div class="pro">
                 <div class="pro-img">
-                    <img src="./images/product-11.jpg" alt="">
+                    <img src="../imgs/kawasaki (1).jpg" alt="">
                 </div>
                 <div class="pro-des">
-                    <p class="name">Red Printed T-shirt</p>
+                    <p class="name">KAWASAKI Z1000</p>
                     <div class="rate">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -226,15 +678,15 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i>
                     </div>
-                    <p class="price">$500.00</p>
+                    <p class="price">$30000.00</p>
                 </div>
             </div>
             <div class="pro">
                 <div class="pro-img">
-                    <img src="./images/product-12.jpg" alt="">
+                    <img src="../imgs/kawasaki (2).jpg" alt="">
                 </div>
                 <div class="pro-des">
-                    <p class="name">Red Printed T-shirt</p>
+                    <p class="name">KAWASAKI NINJA H2R</p>
                     <div class="rate">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -258,10 +710,10 @@
             
             <div class="pro">
                 <div class="pro-img">
-                    <img src="./images/product-2.jpg" alt="">
+                    <img src="../imgs/kawasaki (3).jpg" alt="">
                 </div>
                 <div class="pro-des">
-                    <p class="name">Red Printed T-shirt</p>
+                    <p class="name">KAWASAKI NINJA H2R</p>
                     <div class="rate">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -269,15 +721,15 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i>
                     </div>
-                    <p class="price">$500.00</p>
+                    <p class="price">$10000</p>
                 </div>
             </div>
             <div class="pro">
                 <div class="pro-img">
-                    <img src="./images/product-3.jpg" alt="">
+                    <img src="../imgs/yamaha (1).jpg" alt="">
                 </div>
                 <div class="pro-des">
-                    <p class="name">Red Printed T-shirt</p>
+                    <p class="name">YAMAHA R6</p>
                     <div class="rate">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -285,15 +737,15 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i>
                     </div>
-                    <p class="price">$500.00</p>
+                    <p class="price">$10000.00</p>
                 </div>
             </div>
             <div class="pro">
                 <div class="pro-img">
-                    <img src="./images/product-4.jpg" alt="">
+                    <img src="../imgs/yamaha (2).jpg" alt="">
                 </div>
                 <div class="pro-des">
-                    <p class="name">Red Printed T-shirt</p>
+                    <p class="name">YAMAHA R1M</p>
                     <div class="rate">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -301,15 +753,15 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i>
                     </div>
-                    <p class="price">$500.00</p>
+                    <p class="price">$10000.00</p>
                 </div>
             </div>
             <div class="pro">
                 <div class="pro-img">
-                    <img src="./images/product-9.jpg" alt="">
+                    <img src="../imgs/yamaha (3).jpg" alt="">
                 </div>
                 <div class="pro-des">
-                    <p class="name">Red Printed T-shirt</p>
+                    <p class="name">YAMAHA R6</p>
                     <div class="rate">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -317,23 +769,93 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i>
                     </div>
-                    <p class="price">$500.00</p>
+                    <p class="price">$10000.00</p>
                 </div>
             </div>
             
 
         </div>
     </div>
-
-    <!-- Copyright -->
-
     <div class="footer">
         <div>
-            <p>Copyright &copy 2026 - MasterIT Store</p>
+            <p>Copyright &copy 2026 - Thearitstore</p>
         </div>
     </div>
    
-    
-</body>
+  <script>
+    // Sticky header behavior
+    let lastScrollTop = 0;
+    const header = document.getElementById('site-header');
+    const scrollThreshold = 50;
 
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Add box shadow when scrolled
+      if (scrollTop > 10) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      
+      // Hide header when scrolling down, show when scrolling up
+      if (scrollTop > scrollThreshold) {
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+          header.classList.add('header-hidden');
+        } else {
+          header.classList.remove('header-hidden');
+        }
+      }
+      
+      lastScrollTop = scrollTop;
+    });
+
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('show');
+      mobileMenuToggle.parentElement.classList.toggle('mobile-menu-open');
+    });
+
+    // Add active class to nav links
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Remove active class from all links
+        navLinks.forEach(item => {
+          item.classList.remove('active');
+        });
+        
+        // Add active class to clicked link and its mobile/desktop counterpart
+        const linkText = link.textContent;
+        navLinks.forEach(item => {
+          if (item.textContent === linkText) {
+            item.classList.add('active');
+          }
+        });
+        
+        // Close mobile menu if open
+        mobileMenu.classList.remove('show');
+        mobileMenuToggle.parentElement.classList.remove('mobile-menu-open');
+      });
+    });
+
+    // Prevent actual form submission
+    document.querySelectorAll('button').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+      });
+    });
+
+    // Notification CTA
+    document.querySelector('.notification-cta').addEventListener('click', (e) => {
+      e.preventDefault();
+    });
+  </script>
+</body>
 </html>
